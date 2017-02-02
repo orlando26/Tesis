@@ -1,6 +1,7 @@
 """Test program."""
 
 import numpy as np
+from random import randint
 
 #distribution vector function
 def vDis(e,vi):
@@ -59,6 +60,19 @@ def ANSV1(e, sa):
     s2 = np.sum(mo)
     y = s1/(s2 + 0.00000052)
 
-    return y
+    return y, sa
+
+def plotBeahvor(e):
+    sa = randint(0,1)
+
+    rep = []
+    for i in xrange(1, 250):
+        y, sa = ANSV1(e, sa)
+        rep.append(y)
+
+    return rep
+
+test = plotBeahvor(0)
+print(test)
 
 
