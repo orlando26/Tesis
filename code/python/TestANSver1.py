@@ -38,9 +38,9 @@ def nGauss(sa):
     return sa
 
 def ANSV1(e, sa):
-    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.8]), dtype=float)
-    w2 = np.array(([0, 0.0182, 0],[0.6814, 0, 0.2645], [0, 0.9984, 0]), dtype=float)
-    a = np.array(([0, 0, 1],[1, 0, 1], [0, 1, 0]), dtype=float)
+    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    a = np.array(([0.1, 0.1, 0.1],[0.10, 1, 0.1], [0.1, 0, 0.1]), dtype=float)
 
     mAux = np.zeros((3,3), dtype=float)
 
@@ -61,6 +61,27 @@ def ANSV1(e, sa):
     y = s1/(s2 + 0.00000052)
 
     return y, sa
+
+def ANSV2(e, sa):
+    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    a = np.array(([0.1, 0.1, 0.1],[0.10, 1, 0.1], [0.1, 0, 0.1]), dtype=float)
+
+    mAux = np.zeros((3, 3), dtype=float)
+
+    mo = mDis(e, mAux)
+    mo1 = w1 - mo
+
+    sa = nGauss(sa)
+    mo = mDis(sa, mAux)
+    mo2 = w2 - mo
+
+    mAux = mo1 + mo2
+    mo = EVFGauss(mAux, 0.0, 0.15)
+
+    mo = mo * a
+
+    return mo
 
 def plotBeahvor(e):
     sa = randint(0,1)
