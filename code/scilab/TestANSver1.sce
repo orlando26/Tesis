@@ -239,11 +239,6 @@ function [MO,sa]=ANSV2(e,sa)
      [sa]=NGauss(sa); //Chaotic neuron
      [MO]=MDIS(sa,Maux);
      [MO2]=MSUB(MO,W2);
-    //sa=rand();
-    sa=0;
-    Rep=[];
-    for ti=1:500
-        [MO,sa]=ANSV2(e,sa);
      
      
       [Maux]=MADD(MO1,MO2);
@@ -263,6 +258,11 @@ endfunction
 
 
 function [Rep]=plotbehavior2(e)
+    //sa=rand();
+    sa=0;
+    Rep=[];
+    for ti=1:500
+        [MO,sa]=ANSV2(e,sa);
         Rep=[Rep; MO(2,2)];
     end
     //[Rep]=plotbehavior2(0.1);
