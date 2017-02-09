@@ -66,18 +66,18 @@ def aNSSOutput(e, sa):
 
 #Artificial Neural System Matrix Output
 def aNSMOutput(e, sa):
-    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
-    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
+    w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
     A = np.array(([0, 0, 0],[0, 1, 0], [0, 0, 0]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
     E = mDis(e, mAux)
-    m1 = E - w1
+    m1 = w1 - E
 
     sa = nGauss(sa)
     SA = mDis(sa, mAux)
-    m2 = SA - w2
+    m2 = w2 - SA
 
     mAux = m1 + m2
     R = EVFGauss(mAux, 0.0, 0.15)
@@ -123,7 +123,7 @@ def plotPattern(e, figure, subplot, color):
 
 #shows the response of the neural system on different stimulus
 def dynamicNeuralSystemPlot():
-    e = 0
+    e = 0.3
     data = plotPattern(e, 1, 221, 'b')
     xk = data[50:250]
     xkmo = data[49:249]
@@ -154,5 +154,8 @@ def dynamicNeuralSystemPlot():
     plt.figure(2)
     plt.plot(xk, xkmo, 'k')
     print data
+    plt.title('Neural system response on diferent stimulus')
+    plt.xlabel('X(k)')
+    plt.ylabel('X(k-1)')
 
 
