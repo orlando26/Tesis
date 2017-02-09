@@ -1,4 +1,4 @@
-"""Test program."""
+"""Pattern Generator Code."""
 
 import numpy as np
 from random import randint
@@ -31,69 +31,81 @@ def EVFGauss(mi, cm, l):
 
     return mo
 
+#Chaotic gaussian neuron
 def nGauss(sa):
     l = 0.14
     cm = 0.25
     sa = gauss(sa, cm, l)
     return sa
 
-def ANSV1(e, sa):
+#Artificial Neural System Single Output
+def aNSSOutput(e, sa):
     w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
-    a = np.array(([0.1, 0.1, 0.1],[0.10, 1, 0.1], [0.1, 0, 0.1]), dtype=float)
+    A = np.array(([0.1, 0.1, 0.1],[0.10, 1, 0.1], [0.1, 0, 0.1]), dtype=float)
 
     mAux = np.zeros((3,3), dtype=float)
 
-    mo = mDis(e, mAux)
-    mo1 = w1 - mo
+    E = mDis(e, mAux)
+    m1 = w1 - E
 
     sa = nGauss(sa)
-    mo = mDis(sa, mAux)
-    mo2 = w2 - mo
+    SA = mDis(sa, mAux)
+    m2 = w2 - SA
 
-    mAux = mo1 + mo2
-    mo = EVFGauss(mAux, 0.0, 0.15)
+    mAux = m1 + m2
+    R = EVFGauss(mAux, 0.0, 0.15)
 
-    mo1 = mo * a
+    mTemp = R * A
 
-    s1 = np.sum(mo1)
-    s2 = np.sum(mo)
+    s1 = np.sum(mTemp)
+    s2 = np.sum(R)
     y = s1/(s2 + 0.00000052)
 
     return y, sa
 
-def ANSV2(e, sa):
+#Artificial Neural System Matrix Output
+def aNSMOutput(e, sa):
     w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
-    a = np.array(([0.1, 0.1, 0.1],[0.10, 1, 0.1], [0.1, 0, 0.1]), dtype=float)
+    A = np.array(([0, 0, 0],[0, 0.5, 0], [0, 0, 0]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
-    mo = mDis(e, mAux)
-    mo1 = w1 - mo
+    E = mDis(e, mAux)
+    m1 = E - w1
 
     sa = nGauss(sa)
-    mo = mDis(sa, mAux)
-    mo2 = w2 - mo
+    SA = mDis(sa, mAux)
+    m2 = SA - w2
 
-    mAux = mo1 + mo2
-    mo = EVFGauss(mAux, 0.0, 0.15)
+    mAux = m1 + m2
+    R = EVFGauss(mAux, 0.0, 0.15)
 
-    mo = mo * a
+    mo = R * A
 
-    return mo
+    return mo, sa
 
 def plotBeahvor(e):
     sa = randint(0,1)
 
     rep = []
     for i in xrange(1, 250):
-        y, sa = ANSV1(e, sa)
+        y, sa = aNSSOutput(e, sa)
         rep.append(y)
 
     return rep
 
-test = plotBeahvor(0)
-print(test)
+def plotBehavior2(e):
+    sa = 0
+
+    rep = []
+    for i in xrange(1, 500):
+        mo, sa = aNSMOutput(e, sa)
+        rep.append(mo[1][1])
+
+    return rep
+
+
 
 
