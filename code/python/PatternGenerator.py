@@ -1,7 +1,7 @@
 """Pattern Generator Code."""
 
 import numpy as np
-from random import randint
+import matplotlib.pyplot as plt
 
 #distribution vector function
 def vDis(e,vi):
@@ -68,7 +68,7 @@ def aNSSOutput(e, sa):
 def aNSMOutput(e, sa):
     w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
-    A = np.array(([0, 0, 0],[0, 0.5, 0], [0, 0, 0]), dtype=float)
+    A = np.array(([0, 0, 0],[0, 1, 0], [0, 0, 0]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
@@ -86,26 +86,73 @@ def aNSMOutput(e, sa):
 
     return mo, sa
 
-def plotBeahvor(e):
-    sa = randint(0,1)
-
-    rep = []
-    for i in xrange(1, 250):
-        y, sa = aNSSOutput(e, sa)
-        rep.append(y)
-
-    return rep
-
-def plotBehavior2(e):
+#plots a group of 500 samples of the Neural System Output for a given stimulus(e)
+def plotPattern(e):
     sa = 0
 
-    rep = []
+    data = []
     for i in xrange(1, 500):
         mo, sa = aNSMOutput(e, sa)
-        rep.append(mo[1][1])
+        data.append(mo[1][1])
 
-    return rep
+    plt.figure()
+    plt.subplot()
+    plt.plot(data)
+    plt.ylabel('Neuron (1,1) output.')
+    plt.xlabel('n.')
+    plt.title('Plot Pattern On e = ' + str(e))
+    return data
 
 
+#plots a group of 500 samples of the Neural System Output for a given stimulus(e)
+def plotPattern(e, figure, subplot, color):
+    sa = 0
+
+    data = []
+    for i in xrange(1, 251):
+        mo, sa = aNSMOutput(e, sa)
+        data.append(mo[1][1])
+
+    plt.figure(figure)
+    plt.subplot(subplot)
+    plt.plot(data, color)
+    plt.ylabel('Neuron (1,1) output.')
+    plt.xlabel('n.')
+    plt.title('Plot Pattern On e = ' + str(e))
+    return data
+
+#shows the response of the neural system on different stimulus
+def dynamicNeuralSystemPlot():
+    e = 0
+    data = plotPattern(e, 1, 221, 'b')
+    xk = data[50:250]
+    xkmo = data[49:249]
+    plt.figure(2)
+    plt.plot(xk, xkmo, 'b')
+    print data
+
+    e = 0.7
+    data = plotPattern(e, 1, 222, 'g')
+    xk = data[50:250]
+    xkmo = data[49:249]
+    plt.figure(2)
+    plt.plot(xk, xkmo, 'g')
+    print data
+
+    e = 0.9
+    data = plotPattern(e, 1, 223, 'r')
+    xk = data[50:250]
+    xkmo = data[49:249]
+    plt.figure(2)
+    plt.plot(xk, xkmo, 'r')
+    print data
+
+    e = 1
+    data = plotPattern(e, 1, 224, 'k')
+    xk = data[50:250]
+    xkmo = data[49:249]
+    plt.figure(2)
+    plt.plot(xk, xkmo, 'k')
+    print data
 
 
