@@ -68,7 +68,7 @@ def aNSSOutput(e, sa):
 def aNSMOutput(e, sa):
     w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
     w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
-    A = np.array(([0, 0, 0],[0, 1, 0], [0, 0, 0]), dtype=float)
+    A = np.array(([1, 0, 0],[0, 1, 0], [0, 0, 1]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
@@ -87,7 +87,7 @@ def aNSMOutput(e, sa):
     return mo, sa
 
 #plots a group of 500 samples of the Neural System Output for a given stimulus(e)
-def plotPattern(e):
+def plotPattern1(e):
     sa = 0
 
     data = []
