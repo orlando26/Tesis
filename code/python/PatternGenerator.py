@@ -158,4 +158,10 @@ def dynamicNeuralSystemPlot():
     plt.xlabel('X(k)')
     plt.ylabel('X(k-1)')
 
+def getNeuralResponse(e):
+    data = plotPattern1(e)
+    xk = data[50:250]
+    xkmo = data[49:249]
+    return xk, xkmo
+
 
