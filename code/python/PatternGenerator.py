@@ -66,8 +66,10 @@ def aNSSOutput(e, sa):
 
 #Artificial Neural System Matrix Output
 def aNSMOutput(e, sa):
-    w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
-    w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
+    w1 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    # w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
+    # w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
     A = np.array(([1, 0, 0],[0, 1, 0], [0, 0, 1]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
@@ -87,20 +89,13 @@ def aNSMOutput(e, sa):
     return mo, sa
 
 #plots a group of 500 samples of the Neural System Output for a given stimulus(e)
-def plotPattern1(e):
+def plotPattern1(e, cn):
     sa = 0
 
     data = []
     for i in xrange(1, 500):
         mo, sa = aNSMOutput(e, sa)
-        data.append(mo[1][1])
-
-    plt.figure()
-    plt.subplot()
-    plt.plot(data)
-    plt.ylabel('Neuron (1,1) output.')
-    plt.xlabel('n.')
-    plt.title('Plot Pattern On e = ' + str(e))
+        data.append(mo[cn][cn])
     return data
 
 
@@ -158,8 +153,8 @@ def dynamicNeuralSystemPlot():
     plt.xlabel('X(k)')
     plt.ylabel('X(k-1)')
 
-def getNeuralResponse(e):
-    data = plotPattern1(e)
+def getNeuralResponse(e, cn):
+    data = plotPattern1(e, cn)
     xk = data[50:250]
     xkmo = data[49:249]
     return xk, xkmo
