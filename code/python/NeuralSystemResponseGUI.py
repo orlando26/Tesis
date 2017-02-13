@@ -1,3 +1,8 @@
+"""Neural System Response GUI Aplication"""
+# Small GUI to see the Neural System response
+# of three diferent neurons of the ouput matrix in real-time.
+# it uses the functions from PatternGenerator.py.
+
 from Tkinter import *
 import matplotlib
 matplotlib.use("TkAgg")
