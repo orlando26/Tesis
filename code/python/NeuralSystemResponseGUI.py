@@ -12,16 +12,25 @@ import PatternGenerator as pg
 
 class Application(Frame):
 
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.responsePlot = True
+        self.currentNeuron = [1, 1]
+        self.pack(expand=True)
+        self.createWidgets()
+
+
+     #********* Functions ***********#
     def changeToNeuronOne(self):
-        self.currentNeuron = 0
+        self.currentNeuron = [0, 1]
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronTwo(self):
-        self.currentNeuron = 1
+        self.currentNeuron = [1, 1]
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronThree(self):
-        self.currentNeuron = 2
+        self.currentNeuron = [2, 2]
         self.updatePlot(self.stimulus.get())
 
     def updatePlot(self, e):
@@ -29,13 +38,13 @@ class Application(Frame):
         if self.responsePlot:
             x, y = pg.getNeuralResponse(e, self.currentNeuron)
             self.a.plot(x, y)
-            self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron, self.currentNeuron))
+            self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('X(k)')
             self.a.set_ylabel('X(k-1)')
         else:
             data = pg.plotPattern1(e, self.currentNeuron)
             self.a.plot(data)
-            self.a.set_ylabel('Neuron (%d,%d) output.' % (self.currentNeuron, self.currentNeuron))
+            self.a.set_ylabel('Neuron (%d,%d) output.' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('n.')
             self.a.set_title('Plot Pattern On e = ' + str(e))
         self.canvas.show()
@@ -45,14 +54,14 @@ class Application(Frame):
         if self.responsePlot:
             data = pg.plotPattern1(self.stimulus.get(), self.currentNeuron)
             self.a.plot(data)
-            self.a.set_ylabel('Neuron (%d,%d) output.' % (self.currentNeuron, self.currentNeuron))
+            self.a.set_ylabel('Neuron (%d,%d) output.' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('n.')
             self.a.set_title('Plot Pattern On e = ' + str(self.stimulus.get()))
             self.responsePlot = False
         else:
             x, y = pg.getNeuralResponse(self.stimulus.get(), self.currentNeuron)
             self.a.plot(x, y)
-            self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron, self.currentNeuron))
+            self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('X(k)')
             self.a.set_ylabel('X(k-1)')
             self.responsePlot = True
@@ -65,13 +74,7 @@ class Application(Frame):
         self.createStimulusScale()
         self.createPlot()
 
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
-        self.responsePlot = True
-        self.currentNeuron = 1
-        self.pack(expand=True)
-        self.createWidgets()
-
+    #********** Widgets ***********#
     def createQuitButton(self):
         self.QUIT = Button(self)
         self.QUIT["text"] = "QUIT"
@@ -86,7 +89,7 @@ class Application(Frame):
         self.hi_there.pack()
 
     def createStimulusScale(self):
-        self.stimulus = Scale(self, from_=0.00, to_=1.00, resolution=0.01, orient=HORIZONTAL)
+        self.stimulus = Scale(self, from_=0.00, to_=1.00, resolution=0.01, orient=HORIZONTAL, label="Stimulus(e):")
         self.stimulus["command"] = self.updatePlot
         self.stimulus.pack(fill = X)
 
@@ -95,7 +98,7 @@ class Application(Frame):
         self.a = self.f.add_subplot(111)
         x, y = pg.getNeuralResponse(0, self.currentNeuron)
         self.a.plot(x, y)
-        self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron, self.currentNeuron))
+        self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron[0], self.currentNeuron[1]))
         self.a.set_xlabel('X(k)')
         self.a.set_ylabel('X(k-1)')
         self.canvas = FigureCanvasTkAgg(self.f, self)
@@ -107,17 +110,17 @@ class Application(Frame):
 
     def createNeuronBtns(self):
         self.n1 = Button(self)
-        self.n1["text"] = "N(0,0)",
+        self.n1["text"] = "N1",
         self.n1["command"] = self.changeToNeuronOne
         self.n1.pack(side=TOP)
 
         self.n2 = Button(self)
-        self.n2["text"] = "N(1,1)",
+        self.n2["text"] = "N2",
         self.n2["command"] = self.changeToNeuronTwo
         self.n2.pack(side=TOP)
 
         self.n3 = Button(self)
-        self.n3["text"] = "N(2,2)",
+        self.n3["text"] = "N3",
         self.n3["command"] = self.changeToNeuronThree
         self.n3.pack(side=TOP)
 

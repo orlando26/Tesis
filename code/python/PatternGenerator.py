@@ -70,7 +70,7 @@ def aNSMOutput(e, sa):
     w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     # w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
     # w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
-    A = np.array(([1, 0, 0],[0, 1, 0], [0, 0, 1]), dtype=float)
+    A = np.array(([1, 1, 1],[1, 1, 1], [1, 1, 1]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
@@ -93,9 +93,9 @@ def plotPattern1(e, cn):
     sa = 0
 
     data = []
-    for i in xrange(1, 500):
+    for i in xrange(1, 251):
         mo, sa = aNSMOutput(e, sa)
-        data.append(mo[cn][cn])
+        data.append(mo[cn[0]][cn[1]])
     return data
 
 
@@ -118,7 +118,7 @@ def plotPattern(e, figure, subplot, color):
 
 #shows the response of the neural system on different stimulus
 def dynamicNeuralSystemPlot():
-    e = 0.3
+    e = 0
     data = plotPattern(e, 1, 221, 'b')
     xk = data[50:250]
     xkmo = data[49:249]
@@ -158,5 +158,4 @@ def getNeuralResponse(e, cn):
     xk = data[50:250]
     xkmo = data[49:249]
     return xk, xkmo
-
 
