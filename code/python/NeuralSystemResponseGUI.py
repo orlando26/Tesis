@@ -22,15 +22,15 @@ class Application(Frame):
 
      #********* Functions ***********#
     def changeToNeuronOne(self):
-        self.currentNeuron = [0, 1]
+        self.currentNeuron = [0, 0]
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronTwo(self):
-        self.currentNeuron = [1, 1]
+        self.currentNeuron = [0, 1]
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronThree(self):
-        self.currentNeuron = [2, 2]
+        self.currentNeuron = [0  , 2]
         self.updatePlot(self.stimulus.get())
 
     def updatePlot(self, e):

@@ -68,9 +68,11 @@ def aNSSOutput(e, sa):
 def aNSMOutput(e, sa):
     w1 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    #w1 = np.array(([0.1, 0.6, 0.3], [0.2, 0.3, 0.4], [0.9, 0.1, 0.5]), dtype=float)
+    #w2 = np.array(([0.5, 0.7, 0.6], [0.6, 0.4, 0.6], [0.1, 0.2, 0.3]), dtype=float)
     # w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
     # w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
-    A = np.array(([1, 1, 1],[1, 1, 1], [1, 1, 1]), dtype=float)
+    A = np.array(([180, 1, 1],[1, 180, 1], [1, 180, 180]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
