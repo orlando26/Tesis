@@ -26,7 +26,7 @@ class Application(Frame):
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronTwo(self):
-        self.currentNeuron = [0, 1]
+        self.currentNeuron = [1, 1]
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronThree(self):
