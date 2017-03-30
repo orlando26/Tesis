@@ -33,7 +33,7 @@ def EVFGauss(mi, cm, l):
 
 #Chaotic gaussian neuron
 def nGauss(sa):
-    l = 0.14
+    l = 0.15
     cm = 0.25
     sa = gauss(sa, cm, l)
     return sa
@@ -66,7 +66,7 @@ def aNSSOutput(e, sa):
 
 #Artificial Neural System Matrix Output
 def aNSMOutput(e, sa):
-    w1 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     #w1 = np.array(([0.1, 0.6, 0.3], [0.2, 0.3, 0.4], [0.9, 0.1, 0.5]), dtype=float)
     #w2 = np.array(([0.5, 0.7, 0.6], [0.6, 0.4, 0.6], [0.1, 0.2, 0.3]), dtype=float)
@@ -92,7 +92,7 @@ def aNSMOutput(e, sa):
 
 #plots a group of 500 samples of the Neural System Output for a given stimulus(e)
 def plotPattern1(e, cn):
-    sa = 0
+    sa = 1
 
     data = []
     for i in xrange(1, 251):
