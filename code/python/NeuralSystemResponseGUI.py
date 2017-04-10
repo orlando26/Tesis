@@ -21,6 +21,10 @@ class Application(Frame):
 
 
      #********* Functions ***********#
+    def getValues(self):
+        print self.w1.get(), self.w2.get()
+        self.updatePlot(self.stimulus.get())
+
     def changeToNeuronOne(self):
         self.currentNeuron = [0, 0]
         self.updatePlot(self.stimulus.get())
@@ -30,19 +34,19 @@ class Application(Frame):
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronThree(self):
-        self.currentNeuron = [0  , 2]
+        self.currentNeuron = [2  , 2]
         self.updatePlot(self.stimulus.get())
 
     def updatePlot(self, e):
         self.a.clear()
         if self.responsePlot:
-            x, y = pg.getNeuralResponse(e, self.currentNeuron)
+            x, y = pg.getNeuralResponse(e, self.currentNeuron, self.w1.get(), self.w2.get())
             self.a.plot(x, y)
             self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('X(k)')
             self.a.set_ylabel('X(k-1)')
         else:
-            data = pg.plotPattern1(e, self.currentNeuron)
+            data = pg.plotPattern1(e, self.currentNeuron, self.w1.get(), self.w2.get())
             self.a.plot(data)
             self.a.set_ylabel('Neuron (%d,%d) output.' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('n.')
@@ -52,14 +56,14 @@ class Application(Frame):
     def changePlot(self):
         self.a.clear()
         if self.responsePlot:
-            data = pg.plotPattern1(self.stimulus.get(), self.currentNeuron)
+            data = pg.plotPattern1(self.stimulus.get(), self.currentNeuron, self.w1.get(), self.w2.get())
             self.a.plot(data)
             self.a.set_ylabel('Neuron (%d,%d) output.' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('n.')
             self.a.set_title('Plot Pattern On e = ' + str(self.stimulus.get()))
             self.responsePlot = False
         else:
-            x, y = pg.getNeuralResponse(self.stimulus.get(), self.currentNeuron)
+            x, y = pg.getNeuralResponse(self.stimulus.get(), self.currentNeuron, self.w1.get(), self.w2.get())
             self.a.plot(x, y)
             self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron[0], self.currentNeuron[1]))
             self.a.set_xlabel('X(k)')
@@ -72,6 +76,8 @@ class Application(Frame):
         self.createPrintButton()
         self.createNeuronBtns()
         self.createStimulusScale()
+        self.createWightsButton()
+        self.createSpinBox()
         self.createPlot()
 
     #********** Widgets ***********#
@@ -96,7 +102,7 @@ class Application(Frame):
     def createPlot(self):
         self.f = Figure(figsize=(10, 5), dpi=100)
         self.a = self.f.add_subplot(111)
-        x, y = pg.getNeuralResponse(0, self.currentNeuron)
+        x, y = pg.getNeuralResponse(0, self.currentNeuron, self.w1.get(), self.w2.get())
         self.a.plot(x, y)
         self.a.set_title('Neural system response on diferent stimulus on neuron (%d,%d)' % (self.currentNeuron[0], self.currentNeuron[1]))
         self.a.set_xlabel('X(k)')
@@ -123,6 +129,22 @@ class Application(Frame):
         self.n3["text"] = "N3",
         self.n3["command"] = self.changeToNeuronThree
         self.n3.pack(side=TOP)
+
+    def createWightsButton(self):
+        self.wButton = Button(self)
+        self.wButton["text"] = "OK"
+        self.wButton["command"] = self.getValues
+        self.wButton.pack()
+
+    def createSpinBox(self):
+        w = Label(self, text="W1")
+        w.pack()
+        self.w1 = Spinbox(self, from_=0, to_=1, increment=0.01, width=5)
+        self.w1.pack(side=TOP)
+        w = Label(self, text="W2")
+        w.pack()
+        self.w2 = Spinbox(self, from_=0, to_=1, increment=0.01, width=5)
+        self.w2.pack(side=TOP)
 
 
 

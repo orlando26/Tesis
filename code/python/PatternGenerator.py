@@ -40,8 +40,8 @@ def nGauss(sa):
 
 #Artificial Neural System Single Output
 def aNSSOutput(e, sa):
-    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
-    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.2, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.9, 0.4], [0.7, 0.8, 0.9]), dtype=float)
     A = np.array(([0.1, 0.1, 0.1],[0.10, 1, 0.1], [0.1, 0, 0.1]), dtype=float)
 
     mAux = np.zeros((3,3), dtype=float)
@@ -65,14 +65,16 @@ def aNSSOutput(e, sa):
     return y, sa
 
 #Artificial Neural System Matrix Output
-def aNSMOutput(e, sa):
-    w1 = np.array(([0.1, 0.2, 0.3],[0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
-    w2 = np.array(([0.1, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+def aNSMOutput(e, sa, weight1, weight2, cn):
+    w1 = np.array(([0.5, 0.2, 0.3],[0.6, 0.2, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w2 = np.array(([0.3, 0.2, 0.3], [0.6, 0.5, 0.4], [0.7, 0.8, 0.9]), dtype=float)
+    w1[cn[0]][cn[1]] = weight1
+    w2[cn[0]][cn[1]] = weight2
     #w1 = np.array(([0.1, 0.6, 0.3], [0.2, 0.3, 0.4], [0.9, 0.1, 0.5]), dtype=float)
     #w2 = np.array(([0.5, 0.7, 0.6], [0.6, 0.4, 0.6], [0.1, 0.2, 0.3]), dtype=float)
     # w1 = np.array(([0.19, 0.12, 0.03],[0.56, 0.25, 0.45], [0.67, 0.38, 0.99]), dtype=float)
     # w2 = np.array(([0.1, 0.9, 0.8], [0.6, 0.3, 0.4], [0.74, 0.48, 0.79]), dtype=float)
-    A = np.array(([180, 1, 1],[1, 180, 1], [1, 180, 180]), dtype=float)
+    A = np.array(([180, 1, 1],[1, 1, 1], [1, 180, 180]), dtype=float)
 
     mAux = np.zeros((3, 3), dtype=float)
 
@@ -91,12 +93,12 @@ def aNSMOutput(e, sa):
     return mo, sa
 
 #plots a group of 500 samples of the Neural System Output for a given stimulus(e)
-def plotPattern1(e, cn):
+def plotPattern1(e, cn, w1, w2):
     sa = 1
 
     data = []
     for i in xrange(1, 251):
-        mo, sa = aNSMOutput(e, sa)
+        mo, sa = aNSMOutput(e, sa, w1, w2, cn)
         data.append(mo[cn[0]][cn[1]])
     return data
 
@@ -155,8 +157,8 @@ def dynamicNeuralSystemPlot():
     plt.xlabel('X(k)')
     plt.ylabel('X(k-1)')
 
-def getNeuralResponse(e, cn):
-    data = plotPattern1(e, cn)
+def getNeuralResponse(e, cn, w1, w2):
+    data = plotPattern1(e, cn, w1, w2)
     xk = data[50:250]
     xkmo = data[49:249]
     return xk, xkmo
