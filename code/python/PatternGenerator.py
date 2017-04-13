@@ -100,8 +100,25 @@ def plotPattern1(e, cn, w1, w2):
     for i in xrange(1, 251):
         mo, sa = aNSMOutput(e, sa, w1, w2, cn)
         data.append(mo[cn[0]][cn[1]])
+
+    print data[40:44], w1, w2
     return data
 
+def getData(e, cn, w1, w2):
+    sa = 1
+
+    data = []
+    for i in xrange(1, 251):
+        mo, sa = aNSMOutput(e, sa, w1, w2, cn)
+        data.append(mo[cn[0]][cn[1]])
+
+    print data[40:44], w1, w2
+
+def frange(start, stop, step):
+        x = start
+        while x < stop:
+            yield x
+            x += step
 
 #plots a group of 500 samples of the Neural System Output for a given stimulus(e)
 def plotPattern(e, figure, subplot, color):

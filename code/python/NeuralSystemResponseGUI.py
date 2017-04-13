@@ -22,7 +22,6 @@ class Application(Frame):
 
      #********* Functions ***********#
     def getValues(self):
-        print self.w1.get(), self.w2.get()
         self.updatePlot(self.stimulus.get())
 
     def changeToNeuronOne(self):
@@ -139,11 +138,11 @@ class Application(Frame):
     def createSpinBox(self):
         w = Label(self, text="W1")
         w.pack()
-        self.w1 = Spinbox(self, from_=0, to_=1, increment=0.01, width=5)
+        self.w1 = Spinbox(self, from_=0, to_=1, increment=0.1, width=5)
         self.w1.pack(side=TOP)
         w = Label(self, text="W2")
         w.pack()
-        self.w2 = Spinbox(self, from_=0, to_=1, increment=0.01, width=5)
+        self.w2 = Spinbox(self, from_=0, to_=1, increment=0.1, width=5)
         self.w2.pack(side=TOP)
 
 
