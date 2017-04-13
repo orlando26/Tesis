@@ -98,6 +98,8 @@ def plotPattern1(e, cn):
     for i in xrange(1, 251):
         mo, sa = aNSMOutput(e, sa)
         data.append(mo[cn[0]][cn[1]])
+
+    print data[40:44]
     return data
 
 
