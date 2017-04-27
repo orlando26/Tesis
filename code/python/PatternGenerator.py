@@ -112,7 +112,6 @@ def getData(e, cn, w1, w2):
         mo, sa = aNSMOutput(e, sa, w1, w2, cn)
         data.append(mo[cn[0]][cn[1]])
 
-    print data[40:44], w1, w2
 
 def frange(start, stop, step):
         x = start
@@ -178,5 +177,5 @@ def getNeuralResponse(e, cn, w1, w2):
     data = plotPattern1(e, cn, w1, w2)
     xk = data[50:250]
     xkmo = data[49:249]
-    return xk, xkmo
+    return xk, xkmo, data
 
