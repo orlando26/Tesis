@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neural System</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/4.0.2/bootstrap-material-design.min.css"
+    />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/tether/1.3.1/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.material-design/4.0.2/bootstrap-material-design.iife.min.js"></script>
+    <!-- Latest compiled and minified plotly.js JavaScript -->
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- In <head> -->
+    <link href="css/nouislider.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- In <body> -->
+    <script src="js/nouislider.min.js"></script>
+
+    <script src="js/scripts.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page" id="main">
+
+        <div class="header" data-role="header" style="overflow:hidden;">
+        </div>
+
+        <div role="main" class="ui-content content">
+            <div style="margin-top:1vh" class="container">
+                <div class="jumbotron">
+                    <h1 style="text-align: center">Neural System Response</h1>
+                </div>
+                <div style="text-align: center;" class="row">
+                    <div class="col-sm-4">
+                        <h3>W1</h3>
+                        <div class="row">
+                            <div class="col-sm-4"><input id="w1-1" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w1-2" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w1-3" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><input id="w1-4" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w1-5" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w1-6" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><input id="w1-7" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w1-8" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w1-9" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h3>W2</h3>
+                        <div class="row">
+                            <div class="col-sm-4"><input id="w2-1" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w2-2" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w2-3" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><input id="w2-4" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w2-5" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w2-6" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><input id="w2-7" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w2-8" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                            <div class="col-sm-4"><input id="w2-9" class="form-control input-sm weights" style="width: 100%" type="number"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><label id="aLabel" style="text-align: right">A(1,1):</label></div>
+                            <div class="col-sm-8"><input id="aInput" placeholder="Multiplier" class="form-control input-sm"></input></div>
+                        </div>
+                        
+                        
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h3>Output Neurons</h3>
+                            <div class="row">
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(0,0)</button></div>
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(0,1)</button></div>
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(0,2)</button></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(1,0)</button></div>
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(1,1)</button></div>
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(1,2)</button></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(2,0)</button></div>
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(2,1)</button></div>
+                                <div class="col-sm-4"><button href="" class="btn btn-primary btn-fab neuron">N(2,2)</button></div>
+                            </div>
+                    </div>
+                </div>
+                <div style="text-align: left;"><label>Stimulus(e):</label></div>
+                <div class="row">
+                    <div class="col-sm-11">
+                        <div id="slider" class="slider shor slider-success"></div>
+                    </div>
+                    <div class="col-sm-1">
+                        <input id="slideVal" class="form-control input-sm" style="width: 100%" type="number">
+                    </div>
+                </div>
+               
+                <div id="plot" style="width: 100%"></div>
+                <div class="btn-group" style="margin-left: auto;margin-right: auto;">
+                    <button style="float: right" id="pattern-btn" type="button" class="btn btn-success">Pattern</button>
+                    <button style="float: right" id="phase-btn" type="button" class="btn btn-success">Phase Diagram</button>
+                </div>
+
+
+            </div>
+            
+        </div>
+
+
+    </div>
+</body>
+
+</html>
