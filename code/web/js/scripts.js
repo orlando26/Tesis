@@ -176,12 +176,16 @@ function plotPhaseDiagram() {
             title: 'X(k-1)'
         }
     }
-
+    var vals = xData.slice(0, 4);
+    $('#val1-lbl').text('Val1: ' + vals[0].toFixed(3));
+    $('#val2-lbl').text('Val1: ' + vals[1].toFixed(3));
+    $('#val3-lbl').text('Val1: ' + vals[2].toFixed(3));
+    $('#val4-lbl').text('Val1: ' + vals[3].toFixed(3));
     Plotly.newPlot('plot', plotData, layout);
 }
 
 function getData() {
-    var sa = 0;
+    var sa = 0;     
     var data = [];
     for (var i = 0; i < 251; i++) {
         var result = aNSMOutup(e, sa);

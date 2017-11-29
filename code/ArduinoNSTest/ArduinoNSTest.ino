@@ -124,9 +124,9 @@ void loop() {
   Serial.println("******************************");
   
   pieDerecho.write(pieDer);
-  pieIzquierdo.write(pieIzq);
-  piernaIzquierda.write(piernaIzq);
-  piernaDerecha.write(piernaDer);
+  //pieIzquierdo.write(pieIzq);
+  //piernaIzquierda.write(piernaIzq);
+  //piernaDerecha.write(piernaDer);
   
   delay(700);
 
